@@ -11,6 +11,7 @@ namespace EntityWorker.Configurations
         {
             builder.ToTable("UserList");
             builder.HasKey(u => u.Id);
+            builder.HasIndex(u => u.Login);
         }
     }
 }

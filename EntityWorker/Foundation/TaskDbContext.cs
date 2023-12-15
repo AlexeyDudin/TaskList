@@ -8,7 +8,6 @@ namespace EntityWorker.Foundation
     {
         public TaskDbContext(DbContextOptions<TaskDbContext> dbContextOptions) : base(dbContextOptions)
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
