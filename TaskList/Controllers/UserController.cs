@@ -25,9 +25,9 @@ namespace TaskList.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult GetUser([FromQuery] string login)
+        public IActionResult GetUser([FromQuery] UserDto user)
         {
-            return GetResponse(_userApiService.GetUser(login));
+            return GetResponse(_userApiService.GetUser(user));
         }
 
         [HttpPost, Route("Delete")]

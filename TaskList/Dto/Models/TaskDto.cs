@@ -8,5 +8,6 @@
         public DateTime? EstimateTime { get; set; }
         public string UserIssueName { get; set; } = "";
         public string UserWorkerName { get; set; } = "";
+        public List<SubtaskDto> Subtasks { get; set; } = new List<SubtaskDto>();
     }
 }

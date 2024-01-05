@@ -1,17 +1,11 @@
-import {getUser} from './modules/CacheStorage';
-import './App.css';
-import Authorize from './components/Authorize/Authorize';
-import TaskBoard from './components/TaskBoard/TaskBoard';
+import "./App.css";
+import Authorize from "./components/Authorize/Authorize";
+import TaskBoard from "./components/TaskBoard/TaskBoard";
+import { useAppSelector } from "./state/store";
 
 function App() {
-  return <div className='FullScreen'>
-  ({getUser() === undefined ? 
-    <Authorize/>
-    :
-    <TaskBoard/>
-  }
-  )
-  </div>
+  const userLogin = useAppSelector((state) => state.users.login);
+  return userLogin === "" ? <Authorize /> : <TaskBoard />;
   // return (
   //   <div className="App">
   //     {/* <header className="App-header">

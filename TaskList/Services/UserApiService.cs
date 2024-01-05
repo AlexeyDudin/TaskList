@@ -38,11 +38,11 @@ namespace TaskList.Services
             }
         }
 
-        public Result GetUser(string login)
+        public Result GetUser(UserDto user)
         {
             try
             {
-                return new Result(_userService.GetUserByLogin(login), ResponseStatus.Ok);
+                return new Result(_userService.GetUserInfo(user.login, user.password), ResponseStatus.Ok);
             }
             catch (Exception ex)
             {

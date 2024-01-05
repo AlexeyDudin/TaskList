@@ -24,10 +24,10 @@ namespace TaskList.Converters
         {
             return new Domain.User()
             {
-                FullName = dto.FullName,
-                Login = dto.Login,
-                Password = dto.Password,
-                Role = (UserRole)dto.Role
+                FullName = dto.fullName,
+                Login = dto.login,
+                Password = dto.password,
+                Role = (UserRole)dto.role
             };
         }
 
@@ -35,10 +35,10 @@ namespace TaskList.Converters
         {
             return new UserDto()
             {
-                FullName = user.FullName,
-                Login = user.Login,
-                Password = user.Password,
-                Role = (int)user.Role
+                fullName = user.FullName,
+                login = user.Login,
+                password = user.Password,
+                role = (int)user.Role
             };
         }
     }

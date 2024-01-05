@@ -23,7 +23,7 @@ namespace WebAPI.Security.Auths
                 return string.Empty;
             }
 
-            Domain.User user = _userService.GetUserInfo( userLoginDto.Login, userLoginDto.Password );
+            Domain.User user = _userService.GetUserInfo( userLoginDto.login, userLoginDto.password );
 
             if ( user == null )
             {
