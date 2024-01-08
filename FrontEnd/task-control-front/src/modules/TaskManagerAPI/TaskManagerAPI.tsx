@@ -14,4 +14,7 @@ export const TaskManagerAPI = {
     };
     return fetchData(ipAddress + ROUTES.LOGIN, RequestMethod.GET, params);
   },
+  getStatus() {
+    return fetchData(ipAddress + ROUTES.GET_STATUS, RequestMethod.GET);
+  },
 };

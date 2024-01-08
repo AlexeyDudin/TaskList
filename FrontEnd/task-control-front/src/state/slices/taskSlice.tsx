@@ -1,13 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TasksDto } from "../../models/desk/tasks/tasksDto";
+import { DeskDto } from "../../models/desk/deskDto";
 
 interface DeskState {
-  desk: TasksDto;
+  desk: DeskDto;
 }
 
 const deskInitialState: DeskState = {
   desk: {
-    tasks: [],
+    tasks: {
+      tasks: [],
+    },
+    statuses: [],
   },
 };
 
@@ -15,12 +19,17 @@ export const DeskSlice = createSlice({
   name: "desk",
   initialState: deskInitialState,
   reducers: {
-    updateDesk: (state, action: PayloadAction<{ user: TasksDto }>) => {
-      const tmp: TasksDto = action.payload.user;
-      state.desk = tmp;
+    updateTasks: (state, action: PayloadAction<{ desk: TasksDto }>) => {
+      const tmp: TasksDto = action.payload.desk;
+      state.desk.tasks = tmp;
+    },
+    updateStatuses: (state, action: PayloadAction<{ statuses: string[] }>) => {
+      const tmp: string[] = action.payload.statuses;
+      state.desk.statuses = tmp;
     },
   },
 });
 
 export default DeskSlice.reducer;
-export const { updateDesk } = DeskSlice.actions;
+export const { updateTasks: updateTasks, updateStatuses: updateStatuses } =
+  DeskSlice.actions;

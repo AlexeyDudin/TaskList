@@ -70,6 +70,11 @@ function Authorize() {
               type="password"
               placeholder="Password"
               onChange={(event) => (user.password = event.target.value)}
+              onKeyUp={(event) => {
+                if (event.code === "Enter") {
+                  GetUserFromServer(user);
+                }
+              }}
             />
           </FloatingLabel>
           <Button

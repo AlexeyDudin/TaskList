@@ -10,3 +10,8 @@ export type TaskDto = {
   userWorkerName: string;
   subtasks: Array<subtaskDto>;
 };
+
+export type TaskProps = {
+  id: number;
+  task: TaskDto;
+};
