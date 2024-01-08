@@ -1,0 +1,22 @@
+.Header {
+  background-color: #057d9f;
+  display: flex;
+  flex: content;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.UserName {
+  display: flex;
+  flex: content;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: fit-content;
+  align-items: center;
+}
+
+.HeaderElement {
+  margin: 5px;
+}

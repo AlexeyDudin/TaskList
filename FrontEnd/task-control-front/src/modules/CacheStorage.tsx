@@ -10,8 +10,9 @@ function getUserFromStorage(): UserDto | undefined {
   return result;
 }
 
-function setUserToStorage(user: UserDto): void {
-  window.localStorage.setItem(STORAGE_KEY.user, JSON.stringify(user));
+function setUserToStorage(user: UserDto | undefined): void {
+  if (user === undefined) window.localStorage.removeItem(STORAGE_KEY.user);
+  else window.localStorage.setItem(STORAGE_KEY.user, JSON.stringify(user));
 }
 
 export { getUserFromStorage, setUserToStorage };

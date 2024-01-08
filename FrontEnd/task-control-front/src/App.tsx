@@ -1,11 +1,14 @@
 import "./App.css";
 import Authorize from "./components/Authorize/Authorize";
 import TaskBoard from "./components/TaskBoard/TaskBoard";
+import { UserDto } from "./models/users/userDto";
 import { useAppSelector } from "./state/store";
 
 function App() {
-  const userLogin = useAppSelector((state) => state.users.login);
-  return userLogin === "" ? <Authorize /> : <TaskBoard />;
+  const userLogin: string | undefined = useAppSelector((state) => state.users)
+    .user?.login;
+  console.log(userLogin);
+  return userLogin === undefined ? <Authorize /> : <TaskBoard />;
   // return (
   //   <div className="App">
   //     {/* <header className="App-header">

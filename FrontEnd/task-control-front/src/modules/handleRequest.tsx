@@ -43,7 +43,7 @@ async function fetchData(url: string, method: RequestMethod, params?: Object) {
     if (response.ok) {
       return response.json();
     }
-    return response;
+    return response.status;
   });
 }
 

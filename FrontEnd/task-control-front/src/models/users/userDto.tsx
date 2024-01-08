@@ -1,14 +1,14 @@
 import { UserRoleDto } from "./userRoleDto";
 
-type UserDto = {
+export type UserDto = {
+  fullName: string;
   login: string;
   password: string;
-  fullName: string;
-  role: UserRoleDto | undefined;
+  role: UserRoleDto | number | undefined;
 };
 
-type UserProps = {
-  login: string;
-};
-
-export { type UserDto, type UserProps };
+export function isUserDto(obj: UserDto): obj is UserDto {
+  return (
+    "fullName" in obj && "login" in obj && "password" in obj && "role" in obj
+  );
+}

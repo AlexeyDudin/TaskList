@@ -1,12 +1,16 @@
-import React, { FC } from 'react';
-import styles from './TaskBoard.module.css';
+import React, { FC } from "react";
+import styles from "./TaskBoard.module.css";
+import Header from "./Header/Header";
 
 interface TaskBoardProps {}
 
-const TaskBoard: FC<TaskBoardProps> = () => (
-  <div className={styles.TaskBoard}>
-    TaskBoard Component
-  </div>
-);
+function TaskBoard() {
+  return (
+    <div className={styles.TaskBoard}>
+      <Header></Header>
+      TaskBoard Component
+    </div>
+  );
+}
 
 export default TaskBoard;
