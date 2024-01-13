@@ -1,5 +1,4 @@
-﻿using Application;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskList.Dto.Models;
 using TaskList.Services;
@@ -36,6 +35,13 @@ namespace TaskList.Controllers
         public IActionResult GetAllTask([FromBody] TaskDto newTask)
         {
             return GetResponse(_taskApiService.AddTask(newTask));
+        }
+
+        [AllowAnonymous]
+        [HttpPost, Route("get/status")]
+        public IActionResult GetTasksByStatus([FromBody] StatusDto status) 
+        {
+            return GetResponse(_taskApiService.GetTasksByStatus(status));
         }
     }
 }

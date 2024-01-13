@@ -41,5 +41,21 @@ namespace Application
         {
             return _unitOfWork.TaskRepository.Where(t => t.State == TaskState.Archive);
         }
+
+        public List<string> GetStatuses()
+        {
+            List<string> result = new List<string>();
+            foreach (TaskState state in Enum.GetValues(typeof(TaskState)))
+            { 
+                result.Add(state.ToString());
+            }
+            return result;
+        }
+
+        public List<Domain.Task> GetTasksByStatusId(int id)
+        {
+            var status = (TaskState)id;
+            return _unitOfWork.TaskRepository.Where(t => t.State == status);
+        }
     }
 }

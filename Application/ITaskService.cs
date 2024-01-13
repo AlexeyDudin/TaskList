@@ -8,5 +8,7 @@ namespace Application
         public List<Domain.Task> GetAllTasks();
         public List<Domain.Task> GetActiveTask();
         public List<Domain.Task> GetArchiveTask();
+        public List<string> GetStatuses();
+        public List<Domain.Task> GetTasksByStatusId(int id);
     }
 }

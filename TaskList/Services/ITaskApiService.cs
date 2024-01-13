@@ -8,5 +8,7 @@ namespace TaskList.Services
         Result GetAllTask();
         Result GetActiveTask();
         Result AddTask(TaskDto dto);
+        Result GetStatuses();
+        Result GetTasksByStatus(StatusDto status);
     }
 }

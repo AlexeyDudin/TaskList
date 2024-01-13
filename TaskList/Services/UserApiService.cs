@@ -18,7 +18,7 @@ namespace TaskList.Services
         {
             try
             {
-                return new Result(_userService.AddUser(user.UserDtoToUser()), ResponseStatus.Ok);
+                return new Result(_userService.AddUser(user.UserDtoToUser()).UserToUserDto(), ResponseStatus.Ok);
             }
             catch (Exception ex) 
             {
@@ -30,7 +30,7 @@ namespace TaskList.Services
         {
             try
             {
-                return new Result(_userService.DeleteUser(user.UserDtoToUser()), ResponseStatus.Ok);
+                return new Result(_userService.DeleteUser(user.UserDtoToUser()).UserToUserDto(), ResponseStatus.Ok);
             }
             catch (Exception ex)
             {
@@ -42,7 +42,7 @@ namespace TaskList.Services
         {
             try
             {
-                return new Result(_userService.GetUserInfo(user.login, user.password), ResponseStatus.Ok);
+                return new Result(_userService.GetUserInfo(user.login, user.password).UserToUserDto(), ResponseStatus.Ok);
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace TaskList.Services
         {
             try
             {
-                return new Result(_userService.UpdateUser(user.UserDtoToUser()), ResponseStatus.Ok);
+                return new Result(_userService.UpdateUser(user.UserDtoToUser()).UserToUserDto(), ResponseStatus.Ok);
             }
             catch (Exception ex)
             {

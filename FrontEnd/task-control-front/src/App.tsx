@@ -1,30 +1,57 @@
 import "./App.css";
 import Authorize from "./components/Authorize/Authorize";
 import TaskBoard from "./components/TaskBoard/TaskBoard";
-import { isStatuses } from "./models/desk/deskDto";
+import { StatusDto, isStatusDtoArray } from "./models/desk/statusDto";
 import { TasksDto } from "./models/desk/tasks/tasksDto";
 import { responseDto } from "./models/responseDto";
 import { TaskManagerAPI } from "./modules/TaskManagerAPI/TaskManagerAPI";
-import { updateStatuses, updateTasks } from "./state/slices/taskSlice";
+import {
+  updateStatuses,
+  updateTask,
+  updateTaskList,
+  updateTasksByStatus,
+} from "./state/slices/taskSlice";
 import { useAppDispatch, useAppSelector } from "./state/store";
 
 function App() {
   const dispatch = useAppDispatch();
 
   function UpdateHook(desk: TasksDto): void {
-    dispatch(updateTasks({ desk: desk }));
+    dispatch(updateTask({ desk: desk }));
   }
 
-  function UpdateStatusesHook(tasks: string[]): void {
+  function UpdateStatusesHook(tasks: StatusDto[]): void {
     dispatch(updateStatuses({ statuses: tasks }));
   }
-  async function GetStatusesFromServer(): Promise<Array<string> | undefined> {
+
+  function UpdateTasksByStatus(tasks: TasksDto, status: StatusDto): void {
+    dispatch(updateTasksByStatus({ tasks: tasks, status: status }));
+  }
+
+  function UpdateTasks(tasks: TasksDto): void {
+    dispatch(updateTaskList({ tasks: tasks }));
+  }
+
+  async function GetStatusesFromServer(): Promise<StatusDto[] | undefined> {
     return await TaskManagerAPI.getStatus().then(
       (response: responseDto | Response) => {
         if (response instanceof Response) {
           alert(response.status + " " + response.text());
         } else {
-          if (isStatuses(response.content)) {
+          if (isStatusDtoArray(response.content)) {
+            TaskManagerAPI.getAllTasks().then(
+              (response: responseDto | Response) => {
+                if (response instanceof Response) {
+                  alert(response.status + " " + response.text());
+                } else {
+                  updateTaskList(response.content);
+                }
+              }
+            );
+            // const statuses: StatusDto[] = response.content;
+            // statuses.forEach((status) => {
+            //   TaskManagerAPI.getTasksByStatus(status);
+            // });
             return response.content;
           }
         }
@@ -32,7 +59,7 @@ function App() {
     );
   } // UpdateHook(statuses);
 
-  GetStatusesFromServer().then((statuses: string[] | undefined) => {
+  GetStatusesFromServer().then((statuses: StatusDto[] | undefined) => {
     if (statuses !== undefined) UpdateStatusesHook(statuses);
     else UpdateStatusesHook([]);
   });
@@ -40,24 +67,6 @@ function App() {
     .user?.login;
   console.log(userLogin);
   return userLogin === undefined ? <Authorize /> : <TaskBoard />;
-  // return (
-  //   <div className="App">
-  //     {/* <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.tsx</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header> */}
-  //   </div>
-  // );
 }
 
 export default App;
